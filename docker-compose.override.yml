@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+
+  dashboard:
+    container_name: dashboard
+    environment:
+      CHOKIDAR_USEPOLLING: 'true'
+    tty: true
+    command: yarn start
+    volumes:
+      - ./dashboard:/dashboard
