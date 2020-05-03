@@ -1,0 +1,5 @@
+session_name: hfd
+start_directory: '~/workspace/hrsa-findings-dashboard'
+windows:
+  - window_name: home
+    focus: 'true'
