@@ -3,3 +3,46 @@ start_directory: '~/workspace/hrsa-findings-dashboard'
 windows:
   - window_name: home
     focus: 'true'
+  - window_name: dashboard
+    layout: 0227,266x59,0,0[266x47,0,0{184x47,0,0,38,81x47,185,0,39},266x11,0,48,40]
+    panes:
+      - shell_command:
+        - cd dashboard
+        - vim
+        focus: true
+      - shell_command:
+        - cd dashboard
+        - reset
+      - shell_command:
+        - cd dashboard
+        - reset
+  - window_name: api
+    layout: 0227,266x59,0,0[266x47,0,0{184x47,0,0,38,81x47,185,0,39},266x11,0,48,40]
+    panes:
+      - shell_command:
+        - cd api
+        - '[ -d `poetry env info -p` ] && source `poetry env info -p`/bin/activate && reset'
+        - vim
+        focus: true
+      - shell_command:
+        - cd api
+        - reset
+      - shell_command:
+        - cd api
+        - reset
+  - window_name: etl
+    layout: 0227,266x59,0,0[266x47,0,0{184x47,0,0,38,81x47,185,0,39},266x11,0,48,40]
+    panes:
+      - shell_command:
+        - cd etl
+        - '[ -d `poetry env info -p` ] && source `poetry env info -p`/bin/activate && reset'
+        - vim
+        focus: true
+      - shell_command:
+        - cd etl
+        - reset
+      - shell_command:
+        - cd etl
+        - reset
+  - window_name: db
+  - window_name: lb
