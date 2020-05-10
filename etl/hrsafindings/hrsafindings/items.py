@@ -19,6 +19,7 @@ class HrsafindingsItem(scrapy.Item):
     year = scrapy.Field(
         output_processor= TakeFirst()
     )
+    full_year = scrapy.Field()
     entity = scrapy.Field(
         input_processor = MapCompose(remove_tags, replace_escape_chars, remove_empty),
         output_processor = Join()
@@ -27,6 +28,7 @@ class HrsafindingsItem(scrapy.Item):
         input_processor = MapCompose(remove_tags, replace_escape_chars, remove_empty),
         output_processor = Join()
     )
+    entity_abv = scrapy.Field()
     state = scrapy.Field(
         input_processor = MapCompose(remove_tags, replace_escape_chars, remove_empty),
         output_processor = Join()
@@ -43,6 +45,7 @@ class HrsafindingsItem(scrapy.Item):
         input_processor = MapCompose(remove_tags, replace_escape_chars, remove_empty),
         output_processor = Join(separator='--')
     )
+    closure_date = scrapy.Field()
     entity_contact = scrapy.Field(
         input_processor = MapCompose(remove_tags, replace_escape_chars, remove_empty),
         output_processor = Join(separator='--')
