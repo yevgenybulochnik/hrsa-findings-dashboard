@@ -1,5 +1,10 @@
 """Helper functions for item data munging"""
 import re
+import calendar
+
+
+MONTHS = [ calendar.month_name[i] for i in range(1,12) ]
+MONTHS_REGEX = f'({"|".join(MONTHS)})'
 
 
 def full_year(value):
@@ -7,8 +12,6 @@ def full_year(value):
     match = re.search('(\d+)', value)
     if match:
         return f'20{match.group(1)}'
-    else:
-        return None
 
 
 def entity_abv(value):
@@ -17,15 +20,11 @@ def entity_abv(value):
     match = re.search('(\D+)', value)
     if match:
         return match.group(1)
-    else:
-        return None
 
 
 def closure_date(value):
     """Return audit closure date if one exists"""
     if value:
-        match = re.search('.+:[ ]?(.+ \d+, \d+)', value)
+        match = re.search(f'.+:?[ ]({MONTHS_REGEX} \d+, \d+)', value, re.IGNORECASE)
         if match:
             return match.group(1)
-        else:
-            return None
