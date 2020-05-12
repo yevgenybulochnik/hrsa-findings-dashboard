@@ -33,7 +33,7 @@ class HrsafindingsItem(scrapy.Item):
         input_processor = MapCompose(remove_tags, replace_escape_chars, remove_empty),
         output_processor = Join()
     )
-    OPA_findings = scrapy.Field(
+    opa_findings = scrapy.Field(
         input_processor = MapCompose(remove_tags, replace_escape_chars, remove_empty),
         output_processor = Join(separator='--')
     )
@@ -41,7 +41,7 @@ class HrsafindingsItem(scrapy.Item):
         input_processor = MapCompose(remove_tags, replace_escape_chars, remove_empty),
         output_processor = Join(separator='--')
     )
-    CAP_status = scrapy.Field(
+    cap_status = scrapy.Field(
         input_processor = MapCompose(remove_tags, replace_escape_chars, remove_empty),
         output_processor = Join(separator='--')
     )
