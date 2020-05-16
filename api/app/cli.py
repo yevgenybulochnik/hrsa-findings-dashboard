@@ -28,3 +28,22 @@ def seed(filepath):
 
         db.session.add_all(objs)
         db.session.commit()
+
+
+@click.command()
+@with_appcontext
+def ipython():
+    from app.database import db
+    from app.auditlog.models import Record
+    from IPython import embed
+    from traitlets.config import get_config
+    config = get_config()
+    config.InteractiveShellEmbed.colors = 'Linux'
+    embed(
+        user_ns={
+            'db': db,
+            'Record': Record
+        },
+        config=config
+    )
+
