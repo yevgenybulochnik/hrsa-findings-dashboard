@@ -3,7 +3,7 @@ import re
 import calendar
 
 
-MONTHS = [ calendar.month_name[i] for i in range(1,12) ]
+MONTHS = [ calendar.month_name[i] for i in range(1,13) ]
 MONTHS_REGEX = f'({"|".join(MONTHS)})'
 
 
@@ -25,6 +25,6 @@ def entity_abv(value):
 def closure_date(value):
     """Return audit closure date if one exists"""
     if value:
-        match = re.search(f'.+:?[ ]({MONTHS_REGEX} \d+, \d+)', value, re.IGNORECASE)
+        match = re.search(f'.+({MONTHS_REGEX} \d+, \d+)', value, re.IGNORECASE)
         if match:
             return match.group(1)

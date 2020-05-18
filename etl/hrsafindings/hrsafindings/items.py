@@ -24,7 +24,7 @@ class HrsafindingsItem(scrapy.Item):
         input_processor = MapCompose(remove_tags, replace_escape_chars, remove_empty),
         output_processor = Join()
     )
-    id = scrapy.Field(
+    hrsa_id = scrapy.Field(
         input_processor = MapCompose(remove_tags, replace_escape_chars, remove_empty),
         output_processor = Join()
     )

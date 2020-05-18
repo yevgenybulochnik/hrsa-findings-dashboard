@@ -29,7 +29,7 @@ class HrsafindingsPipeline:
 
     def process_item(self, item, spider):
         item['full_year'] = full_year(item['year'])
-        item['entity_abv'] = entity_abv(item['id'])
+        item['entity_abv'] = entity_abv(item['hrsa_id'])
         item['closure_date'] = closure_date(item['cap_status'])
         self.exporter.export_item(item)
         return item
