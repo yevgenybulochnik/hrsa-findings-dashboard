@@ -2,6 +2,35 @@ version: '3.7'
 
 services:
 
+  lb:
+    image: traefik:2.2.1
+    container_name: lb
+    ports:
+      - 3000:80
+    command:
+      - --providers.docker
+      - --log.level=Info
+      - --accessLog
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  db:
+    environment:
+      POSTGRES_DB: hrsa
+    container_name: db
+    volumes:
+      - db_data:/var/lib/postgresql/data/
+
+  api:
+    container_name: api
+    tty: true
+    command: flask run -h 0.0.0.0
+    volumes:
+      - ./api:/api
+    labels:
+      traefik.http.routers.api.rule: PathPrefix(`/api`)
+      traefik.http.routers.api.priority: 100
+
   dashboard:
     container_name: dashboard
     environment:
@@ -10,3 +39,10 @@ services:
     command: yarn start
     volumes:
       - ./dashboard:/dashboard
+      - node_modules:/dashboard/node_modules
+    labels:
+      traefik.http.routers.dashboard.rule: HostRegexp(`{catchAll:.*}`)
+
+volumes:
+  db_data:
+  node_modules:
