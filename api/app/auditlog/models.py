@@ -4,11 +4,11 @@ from app.database import db, Model, Column
 class Record(Model):
     __tablename__ = 'records'
     id = Column(db.Integer, primary_key=True)
-    hrsa_id = Column(db.String(32))
-    entity = Column(db.String(32))
-    entity_abv = Column(db.String(32))
-    state = Column(db.String(32))
-    year = Column(db.String(32))
+    hrsa_id = Column(db.String())
+    entity = Column(db.String())
+    entity_abv = Column(db.String())
+    state = Column(db.String())
+    year = Column(db.String())
     full_year = Column(db.Integer)
     opa_findings = Column(db.String())
     sanction = Column(db.String())
