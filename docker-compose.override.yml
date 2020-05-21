@@ -27,6 +27,7 @@ services:
     command: flask run -h 0.0.0.0
     volumes:
       - ./api:/api
+      - ./etl/data/:/data
     labels:
       traefik.http.routers.api.rule: PathPrefix(`/api`)
       traefik.http.routers.api.priority: 100
