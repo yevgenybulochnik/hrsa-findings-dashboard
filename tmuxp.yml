@@ -46,3 +46,10 @@ windows:
         - reset
   - window_name: db
   - window_name: lb
+  - window_name: docker
+    layout: 9a70,266x59,0,0{133x59,0,0,83,132x59,134,0,85}
+    panes:
+      -
+        focus: true
+      - shell_command:
+        - vim docker-compose.override.yml
