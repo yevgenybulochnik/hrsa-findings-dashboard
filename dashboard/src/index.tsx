@@ -13,9 +13,7 @@ FocusStyleManager.onlyShowFocusOnTabs();
 
 ReactDOM.render(
   <Router>
-    <React.StrictMode>
-      <Dashboard />
-    </React.StrictMode>
+    <Dashboard />
   </Router>,
   document.getElementById('root')
 );
