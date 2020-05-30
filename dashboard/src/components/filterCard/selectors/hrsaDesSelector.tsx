@@ -36,7 +36,8 @@ const HrsaDesSelector: React.SFC<Props> = (props) => {
   const {
     hrsaDesItems,
     selectedHrsaDess,
-    onItemSelect
+    onItemSelect,
+    onTagRemove,
   } = props
   return (
     <FormGroup label='HRSA Designation'>

@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Card, Elevation } from '@blueprintjs/core'
-import YearSelector from './yearSelector'
-import StateSelector from './stateSelector'
-import HrsaDesSelector from'./hrsaDesSelector'
+import YearSelector from './selectors/yearSelector'
+import StateSelector from './selectors/stateSelector'
+import HrsaDesSelector from'./selectors/hrsaDesSelector'
 
 
 interface Props {
@@ -34,6 +34,7 @@ const FilterCard: React.SFC<Props> = (props) => {
     onStateSelect,
     hrsaDesItems,
     selectedHrsaDes,
+    onHrsaDesSelect,
   } = props
 
   return (
@@ -42,16 +43,19 @@ const FilterCard: React.SFC<Props> = (props) => {
         yearItems={yearItems}
         selectedYears={selectedYears}
         onItemSelect={onYearSelect}
+        onTagRemove={() => console.log('remove')}
       />
       <StateSelector
         stateItems={stateItems}
         selectedStates={selectedStates}
         onItemSelect={onStateSelect}
+        onTagRemove={() => console.log('remove')}
       />
       <HrsaDesSelector
         hrsaDesItems={hrsaDesItems}
         selectedHrsaDess={selectedHrsaDes}
-        onItemSelect={onStateSelect}
+        onItemSelect={onHrsaDesSelect}
+        onTagRemove={() => console.log('remove')}
       />
     </StyledCard>
   )
