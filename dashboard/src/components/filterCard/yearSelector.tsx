@@ -1,6 +1,6 @@
 import React from 'react'
 import { MenuItem, FormGroup } from '@blueprintjs/core'
-import { ItemRenderer, MultiSelect } from '@blueprintjs/select'
+import { ItemRenderer, ItemPredicate, MultiSelect } from '@blueprintjs/select'
 
 
 interface AuditYear {
@@ -18,10 +18,15 @@ const YearRenderer: ItemRenderer<AuditYear> = (auditYear, { handleClick }) => (
   />
 )
 
+const yearFilter: ItemPredicate<AuditYear> = (query, auditYear) => {
+  return auditYear.year.toLowerCase().indexOf(query.toLowerCase()) >= 0
+}
+
 interface Props {
   yearItems: AuditYear[];
   selectedYears: AuditYear[];
   onItemSelect: () => void;
+  onTagRemove: () => void;
 }
 
 const YearSelect = MultiSelect.ofType<AuditYear>()
@@ -30,17 +35,23 @@ const YearSelector: React.SFC<Props> = (props) => {
   const {
     yearItems,
     selectedYears,
-    onItemSelect
+    onItemSelect,
+    onTagRemove,
   } = props
   return (
     <FormGroup label='Year Filter'>
       <YearSelect
         items={yearItems}
         itemRenderer={YearRenderer}
+        itemPredicate={yearFilter}
         selectedItems={selectedYears}
         tagRenderer={(item) => item.year}
         onItemSelect={onItemSelect}
+        tagInputProps={{
+          onRemove: onTagRemove
+        }}
         fill
+        noResults={<MenuItem text='No Results' disabled />}
       />
     </FormGroup>
   )

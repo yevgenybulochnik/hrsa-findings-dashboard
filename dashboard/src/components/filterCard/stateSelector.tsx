@@ -25,14 +25,15 @@ const StateRenderer: ItemRenderer<State> = (state, { handleClick, modifiers}) =>
   )
 }
 
+const stateFilter: ItemPredicate<State> = (query, state) => {
+  return state.name.toLowerCase().indexOf(query.toLowerCase()) >= 0
+}
+
 interface Props {
   stateItems: State[];
   selectedStates: State[];
   onItemSelect: () => void;
-}
-
-const stateFilter: ItemPredicate<State> = (query, state) => {
-  return state.name.toLowerCase().indexOf(query.toLowerCase()) >= 0
+  onTagRemove: () => void;
 }
 
 const StateSelect = MultiSelect.ofType<State>()
@@ -41,7 +42,8 @@ const StateSelector: React.SFC<Props> = (props) => {
   const {
     stateItems,
     selectedStates,
-    onItemSelect
+    onItemSelect,
+    onTagRemove,
   } = props
   return (
     <FormGroup label='State Filter'>
@@ -52,6 +54,9 @@ const StateSelector: React.SFC<Props> = (props) => {
         selectedItems={selectedStates}
         tagRenderer={(item) => item.abv}
         onItemSelect={onItemSelect}
+        tagInputProps={{
+          onRemove: onTagRemove
+        }}
         noResults={<MenuItem text='No Results' disabled />}
         fill
       />
