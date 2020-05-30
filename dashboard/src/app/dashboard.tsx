@@ -1,9 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router'
-import Nav from 'components/navBar'
-import Content from 'components/content'
-import { Table } from 'components/table'
-
+import Nav from './components/navBar'
+import Content from './components/content'
 
 const navConfig: NavLink[] = [
   { id: 'overview', name: 'Overview', path: '/' },
