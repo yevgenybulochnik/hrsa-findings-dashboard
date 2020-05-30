@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import PerfectScrollbar from 'react-perfect-scrollbar'
-import { Card, Elevation } from '@blueprintjs/core'
-import { useTable, useFlexLayout } from 'react-table'
+import { Card, Elevation, Button } from '@blueprintjs/core'
+import { useTable, useFlexLayout, usePagination } from 'react-table'
 import 'react-perfect-scrollbar/dist/css/styles.css'
 
 
@@ -48,6 +48,23 @@ const Tbody = styled.div<{height: string}>`
   overflow-x: hidden;
 `
 
+const Pagination = styled.div`
+  display: flex;
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+  border-top: 1px solid #d4d3d3;
+`
+const PageInfo = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+`
+
+const PageInfoItem = styled.span`
+  flex: 1;
+  text-align: center;
+`
+
 interface Props {
   columns: any;
   data: any;
@@ -65,19 +82,27 @@ const Table: React.SFC<Props> = (props) => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
-    prepareRow
+    prepareRow,
+    page,
+    canPreviousPage,
+    canNextPage,
+    previousPage,
+    nextPage,
+    pageCount,
+    state: { pageIndex }
   } = useTable({
     columns,
     data,
-  }, useFlexLayout)
+    // @ts-ignore
+    initialState: { pageSize: 50 }
+  }, usePagination, useFlexLayout)
 
   return (
     <Card elevation={Elevation.TWO}>
       <Wrapper>
         <TableContainer {...getTableProps()}>
           <Thead>
-          {headerGroups.map((headerGroup) => (
+            {headerGroups.map((headerGroup: any) => (
             <Tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column: any) => (
               <Th {...column.getHeaderProps({align: column.align})}>
@@ -89,7 +114,7 @@ const Table: React.SFC<Props> = (props) => {
           </Thead>
           <Tbody {...getTableBodyProps()} height={height}>
             <PerfectScrollbar>
-              {rows.map((row: any) => {
+              {page.map((row: any) => {
                 prepareRow(row)
                 return (
                   <Tr {...row.getRowProps()}>
@@ -103,6 +128,15 @@ const Table: React.SFC<Props> = (props) => {
               })}
             </PerfectScrollbar>
           </Tbody>
+          <Pagination>
+            <Button style={{flex: 1}} minimal fill onClick={previousPage} disabled={!canPreviousPage}>Previous</Button>
+            <PageInfo>
+              <PageInfoItem>{pageIndex + 1}</PageInfoItem>
+              <PageInfoItem>/</PageInfoItem>
+              <PageInfoItem>{pageCount}</PageInfoItem>
+            </PageInfo>
+            <Button style={{flex: 1}} minimal fill onClick={nextPage} disabled={!canNextPage}>Next</Button>
+          </Pagination>
         </TableContainer>
       </Wrapper>
     </Card>
