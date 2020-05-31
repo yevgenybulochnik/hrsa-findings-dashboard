@@ -3,6 +3,8 @@ import { Switch, Route } from 'react-router'
 import Nav from './components/navBar'
 import Content from './components/content'
 
+import Explore from './views/explore'
+
 const navConfig: NavLink[] = [
   { id: 'overview', name: 'Overview', path: '/' },
   { id: 'explore', name: 'Explore', path: '/explore' }
@@ -16,7 +18,7 @@ const Dashboard: React.SFC<{}> = () => {
       <Content>
         <Switch>
           <Route path='/explore'>
-            Explore
+            <Explore />
           </Route>
           <Route path='/'>
             Overview
