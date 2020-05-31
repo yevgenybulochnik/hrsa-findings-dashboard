@@ -53,6 +53,7 @@ const HrsaDesSelector: React.SFC<Props> = (props) => {
         }}
         noResults={<MenuItem text='No Results' disabled />}
         fill
+        resetOnSelect
       />
     </FormGroup>
   )

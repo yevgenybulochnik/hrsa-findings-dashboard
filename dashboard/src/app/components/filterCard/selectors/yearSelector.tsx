@@ -50,8 +50,9 @@ const YearSelector: React.SFC<Props> = (props) => {
         tagInputProps={{
           onRemove: onTagRemove
         }}
-        fill
         noResults={<MenuItem text='No Results' disabled />}
+        fill
+        resetOnSelect
       />
     </FormGroup>
   )
