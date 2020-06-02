@@ -109,7 +109,7 @@ const Table: React.SFC<Props> = (props) => {
                   <span {...column.getSortByToggleProps()}>
                     {column.render('Header')}
                     <span style={{marginLeft: '4px'}}>
-                      {column.isSorted ? column.isSortedDesc ? <Icon icon='sort-desc'/> : <Icon icon='sort-asc' /> : '' }
+                      {column.isSorted ? column.isSortedDesc ? <Icon icon='sort-desc' color='grey'/> : <Icon icon='sort-asc' color='grey' /> : '' }
                     </span>
                   </span>
                 </Th>
