@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { RootState } from '../rootReducer'
 import { Table } from '../components/table'
+import { FilterCard } from '../components/filterCard'
 
 // Place holder for now
 
@@ -51,6 +52,7 @@ const Explore: React.SFC<Props> = (props) => {
 
   return (
     <div>
+      <FilterCard />
       <Table height='300px' columns={columns} data={props.data}/>
     </div>
   )
