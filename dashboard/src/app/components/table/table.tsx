@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import PerfectScrollbar from 'react-perfect-scrollbar'
-import { Card, Elevation, Button } from '@blueprintjs/core'
-import { useTable, useFlexLayout, usePagination } from 'react-table'
+import { Card, Elevation, Button, Icon } from '@blueprintjs/core'
+import { useTable, useFlexLayout, usePagination, useSortBy } from 'react-table'
 import 'react-perfect-scrollbar/dist/css/styles.css'
 
 
@@ -95,7 +95,7 @@ const Table: React.SFC<Props> = (props) => {
     data,
     // @ts-ignore
     initialState: { pageSize: 50 }
-  }, usePagination, useFlexLayout)
+  }, useSortBy, usePagination, useFlexLayout)
 
   return (
     <Card elevation={Elevation.TWO}>
@@ -104,11 +104,16 @@ const Table: React.SFC<Props> = (props) => {
           <Thead>
             {headerGroups.map((headerGroup: any) => (
             <Tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column: any) => (
-              <Th {...column.getHeaderProps({align: column.align})}>
-              {column.render('Header')}
-              </Th>
-            ))}
+              {headerGroup.headers.map((column: any) => (
+                <Th {...column.getHeaderProps({align: column.align})}>
+                  <span {...column.getSortByToggleProps()}>
+                    {column.render('Header')}
+                    <span style={{marginLeft: '4px'}}>
+                      {column.isSorted ? column.isSortedDesc ? <Icon icon='sort-desc'/> : <Icon icon='sort-asc' /> : '' }
+                    </span>
+                  </span>
+                </Th>
+              ))}
             </Tr>
           ))}
           </Thead>
