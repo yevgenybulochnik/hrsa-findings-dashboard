@@ -20,7 +20,6 @@ const getFilterSelections = (state: RootState) => {
 
   for (let key in queryParams) {
     if (queryParams[key].length) {
-      console.log(queryParams[key])
       queryString += `${key}=${queryParams[key]}&`
     }
   }
