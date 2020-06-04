@@ -11,3 +11,14 @@ export function auditData(state = [], action: CommonActionTypes): any[] {
       return state
   }
 }
+
+export function selectedAuditEntry(state = null, action: CommonActionTypes): any {
+  switch (action.type) {
+    case 'SELECT_AUDIT_ENTRY': {
+      const { auditEntry } = action.payload
+      return auditEntry
+    }
+    default:
+      return state
+  }
+}

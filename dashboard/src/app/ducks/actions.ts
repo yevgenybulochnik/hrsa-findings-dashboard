@@ -23,3 +23,12 @@ export function fetchAuditDataFailure(error: any) {
     }
   } as const
 }
+
+export function selectAuditEntry(auditEntry: any) {
+  return {
+    type: 'SELECT_AUDIT_ENTRY',
+    payload: {
+      auditEntry
+    }
+  } as const
+}

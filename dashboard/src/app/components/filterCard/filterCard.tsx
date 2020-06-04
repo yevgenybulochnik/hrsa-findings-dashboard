@@ -33,6 +33,7 @@ interface Props {
 const StyledCard = styled(Card)`
   margin-bottom: 1em;
   max-width: 20rem;
+  flex: 1;
 `
 
 

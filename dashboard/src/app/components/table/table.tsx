@@ -69,13 +69,15 @@ interface Props {
   columns: any;
   data: any;
   height: string;
+  onRowClick: any;
 }
 
 const Table: React.SFC<Props> = (props) => {
   const {
     columns,
     data,
-    height
+    height,
+    onRowClick
   } = props
 
   const {
@@ -122,7 +124,7 @@ const Table: React.SFC<Props> = (props) => {
               {page.map((row: any) => {
                 prepareRow(row)
                 return (
-                  <Tr {...row.getRowProps()}>
+                  <Tr {...row.getRowProps()} onClick={() => onRowClick(data[row.index])}>
                     {row.cells.map((cell: any) => (
                       <Td {...cell.getCellProps({align: cell.column.align})}>
                         {cell.render('Cell')}
