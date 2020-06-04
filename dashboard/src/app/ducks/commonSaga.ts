@@ -1,5 +1,4 @@
-import { all, takeEvery, takeLatest, put, select } from 'redux-saga/effects'
-import { CommonActionTypes } from './types'
+import { all, takeLatest, put, select } from 'redux-saga/effects'
 import * as actions from './actions'
 
 
