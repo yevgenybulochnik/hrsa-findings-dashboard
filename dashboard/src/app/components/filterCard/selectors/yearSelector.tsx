@@ -8,15 +8,21 @@ interface AuditYear {
   year: string;
 }
 
-const YearRenderer: ItemRenderer<AuditYear> = (auditYear, { handleClick }) => (
-  <MenuItem
-    id={auditYear.id}
-    key={auditYear.id}
-    label={auditYear.year}
-    text='Audit Year'
-    onClick={handleClick}
-  />
-)
+const YearRenderer: ItemRenderer<AuditYear> = (auditYear, { handleClick, modifiers }) => {
+  if (!modifiers.matchesPredicate) {
+    return null
+  }
+  return (
+    <MenuItem
+      active={modifiers.active}
+      id={auditYear.id}
+      key={auditYear.id}
+      label={auditYear.year}
+      text='Audit Year'
+      onClick={handleClick}
+    />
+  )
+}
 
 const yearFilter: ItemPredicate<AuditYear> = (query, auditYear) => {
   return auditYear.year.toLowerCase().indexOf(query.toLowerCase()) >= 0

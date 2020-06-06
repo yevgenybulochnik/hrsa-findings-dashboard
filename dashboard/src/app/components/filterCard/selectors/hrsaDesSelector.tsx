@@ -9,15 +9,21 @@ interface HrsaDes {
   abv: string;
 }
 
-const HrsaDesRenderer: ItemRenderer<HrsaDes> = (hrsaDes, { handleClick }) => (
-  <MenuItem
-    id={hrsaDes.id}
-    key={hrsaDes.id}
-    label={hrsaDes.abv}
-    text={hrsaDes.designation}
-    onClick={handleClick}
-  />
-)
+const HrsaDesRenderer: ItemRenderer<HrsaDes> = (hrsaDes, { handleClick, modifiers }) => {
+  if (!modifiers.matchesPredicate) {
+    return null
+  }
+  return (
+    <MenuItem
+      active={modifiers.active}
+      id={hrsaDes.id}
+      key={hrsaDes.id}
+      label={hrsaDes.abv}
+      text={hrsaDes.designation}
+      onClick={handleClick}
+    />
+  )
+}
 
 const hrsaDesFilter: ItemPredicate<HrsaDes> = (query, hrsaDes) => {
   return hrsaDes.designation.toLowerCase().indexOf(query.toLowerCase()) >= 0
@@ -40,7 +46,7 @@ const HrsaDesSelector: React.SFC<Props> = (props) => {
     onTagRemove,
   } = props
   return (
-    <FormGroup label='HRSA Designation'>
+    <FormGroup label='HRSA Designation Filter'>
       <HrsaDesSelect
         items={hrsaDesItems}
         itemRenderer={HrsaDesRenderer}
