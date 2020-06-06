@@ -15,6 +15,14 @@ const StyledCallout = styled(Callout)`
   margin-bottom: 0.5em;
 `
 
+const Filler = styled.div`
+  background: rgba(138, 155, 168, 0.15);
+  border-radius: 3px;
+  text-align: center;
+  padding-top: 9em;
+  height: 20em;
+`
+
 interface Props {
   auditEntry: any
 }
@@ -43,13 +51,12 @@ const InfoCard: React.SFC<Props> = (props) => {
             {auditEntry.cap_status}
           </StyledCallout>
         </>
-      ) : (<div>None</div>) }
+      ) : (<Filler>...Please Click Row</Filler>) }
     </StyledCard>
   )
 }
 
 const mapStateToProps =  (state: RootState) => {
-  console.log(state.auditData)
   return {
     auditEntry: state.selectedAuditEntry
   }
