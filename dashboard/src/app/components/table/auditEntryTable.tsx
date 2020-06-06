@@ -29,7 +29,7 @@ const AuditEntryTable: React.SFC<Props> = (props) => {
 
   const columns = React.useMemo(() =>[
         {
-          Header: 'HRSA Findings Data',
+          Header: `HRSA Audit Findings (${data.length})`,
           align: 'center',
           columns: [
             {
@@ -75,7 +75,7 @@ const AuditEntryTable: React.SFC<Props> = (props) => {
             },
           ]
         }
-  ], [])
+  ], [data])
   return (
     <Table height={height} columns={columns} data={data} onRowClick={onRowClick} />
   )
