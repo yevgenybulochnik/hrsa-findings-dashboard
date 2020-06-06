@@ -12,7 +12,9 @@ const getFilterSelections = (state: RootState) => {
     // @ts-ignore
     states: state.filters.selectedStates.map((item: any) => item.abv),
     // @ts-ignore
-    hrsa_designations: state.filters.selectedHrsaDes.map((item: any) => item.abv)
+    hrsa_designations: state.filters.selectedHrsaDes.map((item: any) => item.abv),
+    entity_keywords: state.search.entityKeyword,
+    findings_keywords: state.search.findingsKeyword,
   }
 
   let queryString = '/api/records/?'
@@ -48,7 +50,15 @@ function* init() {
 // Watchers
 
 function* fetchDataWatcher() {
-  yield takeLatest(['FETCH_AUDIT_DATA', 'ADD_FILTER_ITEM', 'REMOVE_FILTER_ITEM'], fetchData)
+  yield takeLatest(
+    [
+      'FETCH_AUDIT_DATA',
+      'ADD_FILTER_ITEM',
+      'REMOVE_FILTER_ITEM',
+      'SET_FINDINGS_KEYWORDS',
+      'SET_ENTITY_KEYWORDS'
+    ], fetchData
+  )
 }
 
 
