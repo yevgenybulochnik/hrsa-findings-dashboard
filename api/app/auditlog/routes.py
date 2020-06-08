@@ -47,4 +47,7 @@ def summary():
         .group_by(Record.full_year)
         .all()
     )
-    return dict(query)
+    result = []
+    for year, count in query:
+        result.append({'year': year, 'count': count})
+    return jsonify(result) 
