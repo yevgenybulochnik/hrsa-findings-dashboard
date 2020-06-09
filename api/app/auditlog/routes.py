@@ -50,4 +50,4 @@ def summary():
     result = []
     for year, count in query:
         result.append({'year': year, 'count': count})
-    return jsonify(result) 
+    return jsonify(result)
