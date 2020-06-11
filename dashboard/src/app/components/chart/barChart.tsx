@@ -56,14 +56,20 @@ class BarChart extends React.Component<Props, State> {
     },
     chartWidth: 0,
     chartHeight: 0,
-    xScale: d3.scaleTime().domain([moment().startOf('month').subtract(1), moment().endOf('month')]),
-    yScale: d3.scaleLinear().domain([0, 20]),
+    xScale: d3.scaleTime(),
+    yScale: d3.scaleLinear(),
   }
 
   componentDidMount(): void {
     this.setDimensions()
 
     window.addEventListener('resize', this.onResize)
+  }
+
+  componentDidUpdate(prevProps: Props): void {
+    if (this.props.data !== prevProps.data) {
+      this.reDrawChart()
+    }
   }
 
   componentWillUnmount(): void {
@@ -96,6 +102,7 @@ class BarChart extends React.Component<Props, State> {
 
   setDimensions(): void {
     const { margin, xScale, yScale } = this.state
+    const { data } = this.props
 
     const width = this.getWidth()
     const height = this.getHeight()
@@ -103,13 +110,17 @@ class BarChart extends React.Component<Props, State> {
     const chartWidth = width - margin.left - margin.right
     const chartHeight = height - margin.top - margin.bottom
 
+    const xExtent = d3.extent(data, (d:any) => moment(`${d.year}-01-01`))
+
     this.setState({
       width,
       height,
       chartWidth,
       chartHeight,
-      xScale: xScale.range([0, chartWidth]),
-      yScale: yScale.range([chartHeight, 0]),
+      // @ts-ignore
+      xScale: xScale.domain([xExtent[0]?.subtract(6, 'months'), xExtent[1]?.add(6, 'months')]).range([0, chartWidth]),
+        // @ts-ignore
+      yScale: yScale.domain([0, d3.max(data, (d: any) => d.count) + 50]).range([chartHeight, 0]),
     }, () => {
       this.drawChart()
     })
@@ -136,8 +147,7 @@ class BarChart extends React.Component<Props, State> {
       .attr('class', 'xScale')
       .call(
         d3.axisBottom(xScale)
-          .ticks(d3.timeDay.every(1))
-          .tickFormat((t) => moment(t as Date).format('M/D')),
+          .tickFormat((t) => moment(t as Date).format('Y')),
       )
       .attr('transform', `translate(0, ${chartHeight})`)
       .selectAll('text')
@@ -168,14 +178,14 @@ class BarChart extends React.Component<Props, State> {
         .data(data)
         .enter()
       .append('rect')
-        .attr('x', (d: any) => xScale(moment(d.timestamp).startOf('day')))
+        .attr('x', (d: any) => xScale(moment(`${d.year}-01-01`)))
         .attr('y', yScale(0))
         .attr('width', '11')
-        .attr('height', chartHeight - yScale(0))
+        .attr('height', () => chartHeight - yScale(0))
         .transition()
           .duration(500)
-          .attr('height', (d: any) => chartHeight - yScale(d.routes.length))
-          .attr('y', (d: any) => yScale(d.routes.length))
+          .attr('height', (d: any) => chartHeight - yScale(d.count))
+          .attr('y', (d: any) => yScale(d.count))
 
     /* eslint-enable indent */
   }
