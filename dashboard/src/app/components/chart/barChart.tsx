@@ -14,6 +14,15 @@ const Chart = styled.div`
   overflow: hidden;
   svg {
     position: absolute;
+    rect {
+      fill: #48AFF0;
+      stroke-width: 1;
+      stroke: #0E5A8A;
+      fill-opacity: 75%;
+    }
+  }
+  .tooltip {
+    position: absolute;
   }
 `
 
@@ -164,7 +173,7 @@ class BarChart extends React.Component<Props, State> {
     // Y-grid
     chart.append('g')
       .attr('class', 'yGrid')
-      .attr('opacity', '0.5')
+      .attr('opacity', '0.2')
       .call(
         d3.axisLeft(yScale)
           .tickSize(-chartWidth)
@@ -173,20 +182,19 @@ class BarChart extends React.Component<Props, State> {
 
     chart.append('g')
       .attr('class', 'datagroup')
-      .attr('transform', 'translate(-5, 0)')
+      .attr('transform', 'translate(-7, 0)')
       .selectAll('rect')
         .data(data)
         .enter()
       .append('rect')
         .attr('x', (d: any) => xScale(moment(`${d.year}-01-01`)))
         .attr('y', yScale(0))
-        .attr('width', '11')
+        .attr('width', '15')
         .attr('height', () => chartHeight - yScale(0))
         .transition()
           .duration(500)
           .attr('height', (d: any) => chartHeight - yScale(d.count))
           .attr('y', (d: any) => yScale(d.count))
-
     /* eslint-enable indent */
   }
 
