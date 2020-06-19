@@ -23,6 +23,8 @@ const Chart = styled.div`
   }
   .tooltip {
     position: absolute;
+    padding: 5px;
+    background-color: grey;
   }
 `
 
@@ -180,6 +182,9 @@ class BarChart extends React.Component<Props, State> {
           .tickFormat(() => ''),
       )
 
+    const tooltip = d3.select(this.container.current).append('div')
+      .attr('class', 'tooltip')
+
     chart.append('g')
       .attr('class', 'datagroup')
       .attr('transform', 'translate(-7, 0)')
@@ -191,6 +196,12 @@ class BarChart extends React.Component<Props, State> {
         .attr('y', yScale(0))
         .attr('width', '15')
         .attr('height', () => chartHeight - yScale(0))
+        .on('mouseenter', function(d: any) {
+          const bar = this
+          tooltip.html(d.count)
+            .style('left', `${bar.getAttribute('x')}px`)
+            .style('top', `${bar.getAttribute('y') || 0 - 30}px`)
+        })
         .transition()
           .duration(500)
           .attr('height', (d: any) => chartHeight - yScale(d.count))
@@ -202,6 +213,7 @@ class BarChart extends React.Component<Props, State> {
     const container = d3.select(this.container.current)
 
     container.select('svg').remove()
+    container.select('.tooltip').remove()
     this.setDimensions()
   }
 
