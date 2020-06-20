@@ -33,6 +33,7 @@ def seed(filepath):
 @click.command()
 @with_appcontext
 def ipython():
+    """Open Ipython session"""
     from app.database import db
     from app.auditlog.models import Record
     from IPython import embed
