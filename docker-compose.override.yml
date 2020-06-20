@@ -22,9 +22,14 @@ services:
       - db_data:/var/lib/postgresql/data/
 
   api:
+    environment:
+      FLASK_APP: api.py
+      FLASK_ENV: development
+      FLASK_DEBUG: 'true'
+      DATABASE_URI: postgres://postgres:postgres@db:5432/hrsa
     container_name: api
     tty: true
-    command: flask run -h 0.0.0.0
+    entrypoint: ./entrypoint.sh
     volumes:
       - ./api:/api
       - ./etl/data/:/data
