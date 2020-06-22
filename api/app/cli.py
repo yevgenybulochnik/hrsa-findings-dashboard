@@ -3,7 +3,7 @@ import datetime
 import click
 from pathlib import Path
 from flask.cli import with_appcontext
-from app.auditlog.models import Record
+from app.auditlog.models import Record, State, HrsaDesignation
 from app.database import db
 
 
@@ -22,8 +22,19 @@ def seed(filepath):
                 closure_date = datetime.datetime.strptime(closure_date, '%B %d, %Y').date()
             except:
                 closure_date = None
+
+            enity_abv_data = record_data.pop('entity_abv')
+            state_data = record_data.pop('state')
+
+            state = State.query.filter_by(abv=state_data).first()
+            hrsa_designation = HrsaDesignation.query.filter_by(abv=enity_abv_data).first()
             objs.append(
-                Record(**record_data, closure_date=closure_date)
+                Record(
+                    **record_data,
+                    state_id = state.id,
+                    hrsa_designation_id=hrsa_designation.id,
+                    closure_date=closure_date,
+                )
             )
 
         db.session.add_all(objs)
