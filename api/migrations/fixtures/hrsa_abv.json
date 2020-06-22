@@ -1,0 +1,86 @@
+[
+  {
+    "abv": "CH",
+    "designation": "Consolidated Health Center"
+  },
+  {
+    "abv": "TB",
+    "designation": "Tuberculosis Clinic"
+  },
+  {
+    "abv": "PED",
+    "designation": "Children's Hospital"
+  },
+  {
+    "abv": "DSH",
+    "designation": "Disproportionate Share Hospital"
+  },
+  {
+    "abv": "FP",
+    "designation": "Family Planning Clinic"
+  },
+  {
+    "abv": "CAH",
+    "designation": "Critical Access Hospital"
+  },
+  {
+    "abv": "STD",
+    "designation": "Sexually Transmitted Disease Clinic"
+  },
+  {
+    "abv": "HV",
+    "designation": "Ryan White Part C"
+  },
+  {
+    "abv": "CHC",
+    "designation": "Community Health Center"
+  },
+  {
+    "abv": "CAN",
+    "designation": "Free-standing Cancer Hospital"
+  },
+  {
+    "abv": "FQHC",
+    "designation": "Fed Qualified Health Center"
+  },
+  {
+    "abv": "SCH",
+    "designation": "Sole Community Hospital"
+  },
+  {
+    "abv": "RWII",
+    "designation": "Ryan White Part B"
+  },
+  {
+    "abv": "RRC",
+    "designation": "Rural Referral Center"
+  },
+  {
+    "abv": "HM",
+    "designation": "Hemophilia Treatment Center"
+  },
+  {
+    "abv": "RWI",
+    "designation": "Ryan White Part A"
+  },
+  {
+    "abv": "RWIID",
+    "designation": "Ryan White Part B ADAP"
+  },
+  {
+    "abv": "DSCH",
+    "designation": "Division of State and Community Health"
+  },
+  {
+    "abv": "FPTN",
+    "designation": "Unknown"
+  },
+  {
+    "abv": "FQHCLA",
+    "designation": "Fed Qualified Lookalike"
+  },
+  {
+    "abv": "HCLA",
+    "designation": "Health Center Lookalike"
+  }
+]
