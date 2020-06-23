@@ -46,7 +46,7 @@ const AuditEntryTable: React.SFC<Props> = (props) => {
             },
             {
               Header: '340B Class',
-              accessor: 'entity_abv',
+              accessor: 'hrsa_des',
               width: 1,
               align: 'center'
             },
