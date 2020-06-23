@@ -16,5 +16,7 @@ class RecordSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Record
 
+hrsa_designations_schema = HrsaDesignationSchema(many=True)
+states_schema = StateSchema(many=True)
 record_schema = RecordSchema()
 records_schema = RecordSchema(many=True)
