@@ -40,7 +40,7 @@ def states():
     result = {
         'state_items': states_schema.dump(states),
         'hrsa_designation_items': hrsa_designations_schema.dump(hrsa_designations),
-        'years': sorted(list(chain(*years)))
+        'year_items': [ {'id': i, 'year': str(year)} for i, year in  enumerate(sorted(list(chain(*years)))) ]
     }
     return result
 
