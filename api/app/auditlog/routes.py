@@ -60,7 +60,16 @@ def summary(states=None):
             .all()
         )
 
-        adj_list = []
+        # Temporary fix to get total counts
+        query2 = (
+            db.session.query(Record.full_year, func.count(Record.id))
+            .group_by(Record.full_year)
+            .order_by(Record.full_year)
+            .all()
+        )
+
+        adj_list = [{'year': year, 'count': count} for year, count in query2]
+
         for year, state, count in query:
             datum = {'year': year}
             datum[state] = count
