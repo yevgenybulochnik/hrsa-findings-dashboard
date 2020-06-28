@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Elevation } from '@blueprintjs/core'
-import BarChart from '../components/chart/barChart'
+import { SummaryChart } from '../components/summaryChart'
 
 
 interface Props {
@@ -11,7 +11,7 @@ const Overview: React.SFC<Props> = (props) => {
   return (
     <>
       <Card elevation={Elevation.TWO}>
-        <BarChart height='200px' data={[]}/>
+        <SummaryChart />
       </Card>
     </>
   )

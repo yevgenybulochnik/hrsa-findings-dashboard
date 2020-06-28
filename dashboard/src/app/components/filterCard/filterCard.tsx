@@ -10,15 +10,12 @@ import HrsaDesSelector from'./selectors/hrsaDesSelector'
 import * as actions from './ducks/actions'
 
 // Temporary data imports, will be removed once api endpoints created
-import yearData from '../../data/years.json'
-import hrsaDes from '../../data/hrsaDes.json'
-import states from '../../data/states.json'
 
 
 interface Props {
-  // yearItems: any;
-  // stateItems: any;
-  // hrsaDesItems: any;
+  yearItems: any;
+  stateItems: any;
+  hrsaDesItems: any;
   selectedYears: any;
   selectedStates: any;
   selectedHrsaDes: any;
@@ -39,6 +36,9 @@ const StyledCard = styled(Card)`
 
 const FilterCard: React.SFC<Props> = (props) => {
   const {
+    yearItems,
+    stateItems,
+    hrsaDesItems,
     selectedYears,
     selectedStates,
     selectedHrsaDes,
@@ -53,19 +53,19 @@ const FilterCard: React.SFC<Props> = (props) => {
   return (
     <StyledCard elevation={Elevation.TWO}>
       <YearSelector
-        yearItems={yearData}
+        yearItems={yearItems}
         selectedYears={selectedYears}
         onItemSelect={onYearSelect}
         onTagRemove={onYearTagRemove}
       />
       <StateSelector
-        stateItems={states as any}
+        stateItems={stateItems}
         selectedStates={selectedStates}
         onItemSelect={onStateSelect}
         onTagRemove={onStateTagRemove}
       />
       <HrsaDesSelector
-        hrsaDesItems={hrsaDes as any}
+        hrsaDesItems={hrsaDesItems}
         selectedHrsaDess={selectedHrsaDes}
         onItemSelect={onHrsaDesSelect}
         onTagRemove={onHrsaDesTagRemove}
@@ -77,6 +77,9 @@ const FilterCard: React.SFC<Props> = (props) => {
 
 const mapStateToProps = (state: RootState) => {
   return {
+    yearItems: state.filterItems.year_items,
+    stateItems: state.filterItems.state_items,
+    hrsaDesItems: state.filterItems.hrsa_designation_items,
     selectedYears: state.filters.selectedYears,
     selectedStates: state.filters.selectedStates,
     selectedHrsaDes: state.filters.selectedHrsaDes,
