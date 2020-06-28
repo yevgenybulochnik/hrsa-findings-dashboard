@@ -24,6 +24,30 @@ export function fetchAuditDataFailure(error: any) {
   } as const
 }
 
+export function fetchFilterItems() {
+  return {
+    type: 'FETCH_FILTER_ITEMS',
+  } as const
+}
+
+export function fetchFilterItemsSuccess(data: any) {
+  return {
+    type: 'FETCH_FILTER_ITEMS_SUCCESS',
+    payload: {
+      data
+    }
+  } as const
+}
+
+export function fetchFilterItemsFailure(error: any) {
+  return {
+    type: "FETCH_FILTER_ITEMS_FAILURE",
+    payload: {
+      error
+    }
+  } as const
+}
+
 export function selectAuditEntry(auditEntry: any) {
   return {
     type: 'SELECT_AUDIT_ENTRY',

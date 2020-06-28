@@ -12,6 +12,23 @@ export function auditData(state = [], action: CommonActionTypes): any[] {
   }
 }
 
+const filterItemsInitState = {
+  state_items: [],
+  hrsa_designation_items: [],
+  year_items: [],
+}
+
+export function filterItems(state = filterItemsInitState, action: CommonActionTypes): any {
+  switch (action.type) {
+    case 'FETCH_FILTER_ITEMS_SUCCESS': {
+      const { data } = action.payload
+      return data
+    }
+    default:
+      return state
+  }
+}
+
 export function selectedAuditEntry(state = null, action: CommonActionTypes): any {
   switch (action.type) {
     case 'SELECT_AUDIT_ENTRY': {
