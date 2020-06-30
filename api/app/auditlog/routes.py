@@ -48,50 +48,58 @@ def states():
 @bp.route("/summary/", methods=['GET'])
 @use_kwargs({
     "states": fields.DelimitedList(fields.Str()),
+    "hrsa_designations": fields.DelimitedList(fields.Str()),
 }, location='query')
-def summary(states=None):
+def summary(states=None, hrsa_designations=None):
+    fields = [Record.full_year]
+    group_by = [Record.full_year]
+    filters = []
+    total_filters = []
+
+
     if states:
-        query = (
-            db.session.query(Record.full_year, State.abv, func.count(Record.id))
-            .join(State)
-            .filter(State.abv.in_(states))
-            .group_by(Record.full_year, State.abv)
-            .order_by(Record.full_year)
-            .all()
-        )
+        fields.append(State.abv)
+        group_by.append(State.abv)
+        filters.append(State.abv.in_(states))
 
-        # Temporary fix to get total counts
-        query2 = (
-            db.session.query(Record.full_year, func.count(Record.id))
-            .group_by(Record.full_year)
-            .order_by(Record.full_year)
-            .all()
-        )
+    if hrsa_designations:
+        filters.append(HrsaDesignation.abv.in_(hrsa_designations))
+        total_filters.append(HrsaDesignation.abv.in_(hrsa_designations))
 
-        adj_list = [{'year': year, 'count': count} for year, count in query2]
+    summary_query = (
+        db.session.query(*fields, func.count(Record.id))
+        .join(State)
+        .join(HrsaDesignation)
+        .filter(*filters)
+        .group_by(*group_by)
+        .order_by(Record.full_year)
+    )
 
-        for year, state, count in query:
+    total_query = (
+        db.session.query(Record.full_year, func.count(Record.id))
+        .join(HrsaDesignation)
+        .filter(*total_filters)
+        .group_by(Record.full_year)
+        .order_by(Record.full_year)
+    )
+
+    total_counts = [{'year': year, 'count': count} for year, count in total_query]
+
+    if not states:
+        return jsonify(total_counts)
+    else:
+        for year, state, count in summary_query:
             datum = {'year': year}
             datum[state] = count
-            adj_list.append(datum)
+            total_counts.append(datum)
 
         dct ={}
 
-        for datum in adj_list:
+        for datum in total_counts:
             if datum['year'] not in dct:
                 dct[datum['year']] = datum
             else:
                 dct[datum['year']].update(datum)
 
         result = [values for _, values in dct.items()]
-
-    else:
-        query = (
-            db.session.query(Record.full_year, func.count(Record.id))
-            .group_by(Record.full_year)
-            .order_by(Record.full_year)
-            .all()
-        )
-
-        result = [{'year': year, 'count': count} for year, count in query]
-    return jsonify(result)
+        return jsonify(result)
