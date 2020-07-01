@@ -34,6 +34,26 @@ function selectedStates(state = [], action: SummaryChartActionTypes) {
   }
 }
 
+function selectedHrsaDes(state = [], action: SummaryChartActionTypes) {
+  switch (action.type) {
+    case 'ADD_SUMMARY_FILTER_ITEM': {
+      const { filter, item } = action.payload
+      if (filter === 'hrsaDes') {
+        return [...state, item]
+      }
+    }
+    case 'REMOVE_SUMMARY_FILTER_ITEM': {
+      const { filter, item } = action.payload
+      if (filter === 'hrsaDes') {
+        const newState = state.filter((hrsaDes: any) => hrsaDes.abv !== item )
+        return newState
+      }
+    }
+    default:
+      return state
+  }
+}
+
 function totalToggleChecked(state = true, action: SummaryChartActionTypes) {
   switch (action.type) {
     case 'TOGGLE_SUMMARY_TOTALS': {
@@ -47,6 +67,7 @@ function totalToggleChecked(state = true, action: SummaryChartActionTypes) {
 const summaryChartReducer = combineReducers({
   summaryData,
   selectedStates,
+  selectedHrsaDes,
   totalToggleChecked,
 })
 
