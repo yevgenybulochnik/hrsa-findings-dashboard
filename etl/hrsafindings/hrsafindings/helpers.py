@@ -28,3 +28,22 @@ def closure_date(value):
         match = re.search(f'.+({MONTHS_REGEX} \d+, \d+)', value, re.IGNORECASE)
         if match:
             return match.group(1)
+
+def tag_findings(finding):
+    """Search OPA Findings and create tags"""
+    tag_regex_dict = {
+        'no_findings': re.compile(r'no adverse findings', re.IGNORECASE),
+        'diversion': re.compile(r'diversion', re.IGNORECASE),
+        'database': re.compile(r'incorrect 340b (opais|database) record', re.IGNORECASE),
+        'gpo': re.compile(r'group purchasing', re.IGNORECASE),
+        'duplicate_discounts': re.compile(r'duplicate discounts', re.IGNORECASE)
+    }
+
+    tags = []
+
+    for tag, regex in tag_regex_dict.items():
+        match = regex.search(finding)
+        if match:
+            tags.append(tag)
+
+    return ','.join(tags)
