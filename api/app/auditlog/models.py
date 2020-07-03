@@ -1,5 +1,15 @@
 from app.database import db, Model, Column, relationship
 
+tags = db.Table('tags',
+    db.Column('tag_id', db.Integer, db.ForeignKey('tag.id'), primary_key=True),
+    db.Column('record_id', db.Integer, db.ForeignKey('records.id'), primary_key=True)
+)
+
+class Tag(Model):
+    __tablename__ = 'tag'
+    id = Column(db.Integer, primary_key=True)
+    title = Column(db.String())
+    name = Column(db.String())
 
 class State(Model):
     __tablename__ = 'states'
@@ -32,3 +42,4 @@ class Record(Model):
     cap_status = Column(db.String())
     closure_date = Column(db.Date())
     entity_contact = Column(db.String())
+    tags = relationship('Tag', secondary='tags', lazy='dynamic', backref=db.backref('records', lazy=True))
