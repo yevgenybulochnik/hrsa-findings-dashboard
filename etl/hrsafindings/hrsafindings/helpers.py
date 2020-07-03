@@ -32,11 +32,11 @@ def closure_date(value):
 def tag_findings(finding):
     """Search OPA Findings and create tags"""
     tag_regex_dict = {
-        'no_findings': re.compile(r'no adverse findings', re.IGNORECASE),
+        'no_findings': re.compile(r'no adverse finding', re.IGNORECASE),
         'diversion': re.compile(r'diversion', re.IGNORECASE),
-        'database': re.compile(r'incorrect 340b (opais|database) record', re.IGNORECASE),
+        'database': re.compile(r'(incorrect|inaccurate) 340b? (opais|database)( record)?', re.IGNORECASE),
         'gpo': re.compile(r'group purchasing', re.IGNORECASE),
-        'duplicate_discounts': re.compile(r'duplicate discounts', re.IGNORECASE)
+        'duplicate_discounts': re.compile(r'duplicate discounts?', re.IGNORECASE)
     }
 
     tags = []
@@ -46,4 +46,7 @@ def tag_findings(finding):
         if match:
             tags.append(tag)
 
-    return ','.join(tags)
+    if tags:
+        return ','.join(tags)
+    else:
+        return 'misc'
