@@ -3,7 +3,7 @@ import datetime
 import click
 from pathlib import Path
 from flask.cli import with_appcontext
-from app.auditlog.models import Record, State, HrsaDesignation
+from app.auditlog.models import Record, State, HrsaDesignation, Tag
 from app.database import db
 
 
@@ -25,6 +25,13 @@ def seed(filepath):
 
             enity_abv_data = record_data.pop('entity_abv')
             state_data = record_data.pop('state')
+            tag_data = record_data.pop('tags')
+
+            tags = []
+
+            for tag in tag_data.split(','):
+                tag = Tag.query.filter_by(name=tag).first()
+                tags.append(tag)
 
             state = State.query.filter_by(abv=state_data).first()
             hrsa_designation = HrsaDesignation.query.filter_by(abv=enity_abv_data).first()
@@ -34,6 +41,7 @@ def seed(filepath):
                     state_id = state.id,
                     hrsa_designation_id=hrsa_designation.id,
                     closure_date=closure_date,
+                    tags=tags,
                 )
             )
 
