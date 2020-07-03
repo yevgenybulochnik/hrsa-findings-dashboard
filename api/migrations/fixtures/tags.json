@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Diversion",
+    "name": "diversion"
+  },
+  {
+    "title": "GPO Prohibition",
+    "name": "gpo"
+  },
+  {
+    "title": "Duplicate Discounts",
+    "name": "duplicate_discounts"
+  },
+  {
+    "title": "OPAIS Database",
+    "name": "database"
+  },
+  {
+    "title": "No Findings",
+    "name": "no_findings"
+  },
+  {
+    "title": "Misc",
+    "name": "misc"
+  }
+]
