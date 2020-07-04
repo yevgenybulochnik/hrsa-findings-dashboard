@@ -8,6 +8,8 @@ export const getFilterSelections = (state: RootState) => {
     states: state.filters.selectedStates.map((item: any) => item.abv),
     // @ts-ignore
     hrsa_designations: state.filters.selectedHrsaDes.map((item: any) => item.abv),
+    // @ts-ignore
+    tags: state.filters.selectedTags.map((item: any) => item.name),
     entity_keywords: state.search.entityKeyword,
     findings_keywords: state.search.findingsKeyword,
   }

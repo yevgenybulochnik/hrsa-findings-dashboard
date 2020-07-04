@@ -62,10 +62,32 @@ function selectedHrsaDes(state = [], action: FilterActionTypes): any[] {
       return state
   }
 }
+
+function selectedTags(state = [], action: FilterActionTypes): any[] {
+  switch (action.type) {
+    case 'ADD_FILTER_ITEM': {
+      const { filter, item } = action.payload
+      if (filter === 'tag') {
+        return [...state, item]
+      }
+    }
+    case 'REMOVE_FILTER_ITEM': {
+      const { filter, item } = action.payload
+      if (filter === 'tag') {
+        const newState = state.filter((tag: any) => tag.title !== item )
+        return newState
+      }
+    }
+    default:
+      return state
+  }
+}
+
 const filterReducer = combineReducers({
   selectedStates,
   selectedYears,
   selectedHrsaDes,
+  selectedTags,
 })
 
 

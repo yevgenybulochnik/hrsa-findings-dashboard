@@ -10,12 +10,30 @@ interface Props {
   onRowClick: any;
 }
 
-const PositiveFindings = styled(Tag)`
-  background-color: #F55656;
+const FindingTag = styled(Tag)`
+  margin: 0 1px 1px 0;
+`
+
+const GpoProhibtion = styled(FindingTag)`
+  background-color: #008075;
   color: white;
 `
 
-const NoFindings = styled(Tag)`
+const Diversion = styled(FindingTag)`
+  background-color: #DB3737;
+  color: white;
+`
+
+const Database = styled(FindingTag)`
+  background-color: #F29D49;
+`
+
+const Duplicate = styled(FindingTag)`
+  background-color: #A854A8;
+  color: white;
+`
+
+const NoFindings = styled(FindingTag)`
   background-color: #15B371;
 `
 
@@ -57,14 +75,30 @@ const AuditEntryTable: React.SFC<Props> = (props) => {
             },
             {
               Header: 'OPA Findings',
-              accessor: 'opa_findings',
-              width: 1,
+              accessor: 'tags',
+              width: 2,
               align: 'center',
               Cell: ( cell: any) => {
-                if (cell.value === 'No adverse findings') {
-                  return <NoFindings>None</NoFindings>
-                }
-                return <PositiveFindings>Findings</PositiveFindings>
+                return cell.value.map((finding: any, i: number) => {
+                  if (finding === 'No Findings') {
+                    return <NoFindings key={i+1}>{finding}</NoFindings>
+                  }
+                  if (finding === 'GPO Prohibition') {
+                    return <GpoProhibtion key={i+1}>{finding}</GpoProhibtion>
+                  }
+                  if (finding === 'Diversion') {
+                    return <Diversion key={i+1}>{finding}</Diversion>
+                  }
+                  if (finding === 'Duplicate Discounts') {
+                    return <Duplicate key={i+1}>{finding}</Duplicate>
+                  }
+                  if (finding === 'OPAIS Database') {
+                    return <Database key={i+1}>OPAIS</Database>
+                  }
+                  if (finding === 'Misc') {
+                    return <FindingTag key={i+1}>{finding}</FindingTag>
+                  }
+                })
               }
             },
             {

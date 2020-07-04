@@ -17,7 +17,7 @@ const FilterSearchContainer = styled.div`
 
 const FlexRow =  styled.div`
   display: flex;
-  height: 400px;
+  height: 500px;
   align-items: center;
 `
 

@@ -16,6 +16,7 @@ const filterItemsInitState = {
   state_items: [],
   hrsa_designation_items: [],
   year_items: [],
+  tag_items: [],
 }
 
 export function filterItems(state = filterItemsInitState, action: CommonActionTypes): any {

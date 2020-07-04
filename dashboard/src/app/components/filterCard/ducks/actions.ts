@@ -1,6 +1,6 @@
 
 
-export function addFilterItem(filter: 'hrsaDes' | 'state' | 'year' , item: any) {
+export function addFilterItem(filter: 'hrsaDes' | 'state' | 'year' | 'tag' , item: any) {
   return {
     type: 'ADD_FILTER_ITEM',
     payload: {
@@ -10,7 +10,7 @@ export function addFilterItem(filter: 'hrsaDes' | 'state' | 'year' , item: any) 
   } as const
 }
 
-export function removeFilterItem(filter: 'hrsaDes' | 'state' | 'year', item: any) {
+export function removeFilterItem(filter: 'hrsaDes' | 'state' | 'year' | 'tag', item: any) {
   return {
     type: 'REMOVE_FILTER_ITEM',
     payload: {
