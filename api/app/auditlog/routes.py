@@ -6,8 +6,8 @@ from sqlalchemy import func
 from flask import jsonify
 from app.database import db
 from . import bp
-from .models import Record, State, HrsaDesignation
-from .schemas import record_schema, records_schema, states_schema, hrsa_designations_schema
+from .models import Record, State, HrsaDesignation, Tag, tags
+from .schemas import record_schema, records_schema, states_schema, hrsa_designations_schema, tags_schema
 
 
 @bp.route("/records/", methods=['GET'])
@@ -16,9 +16,10 @@ from .schemas import record_schema, records_schema, states_schema, hrsa_designat
     "hrsa_designations": fields.DelimitedList(fields.Str()),
     "years": fields.DelimitedList(fields.Str()),
     "findings_keywords": fields.Str(),
-    "entity_keywords": fields.Str()
+    "entity_keywords": fields.Str(),
+    "tags": fields.DelimitedList(fields.Str()),
 }, location='query')
-def records(states=None, hrsa_designations=None, years=None, findings_keywords=None, entity_keywords=None):
+def records(states=None, hrsa_designations=None, years=None, findings_keywords=None, entity_keywords=None, tags=None):
     query = Record.query.join(State).join(HrsaDesignation)
     if (states):
         query = query.filter(State.abv.in_(states))
@@ -26,6 +27,8 @@ def records(states=None, hrsa_designations=None, years=None, findings_keywords=N
         query = query.filter(HrsaDesignation.abv.in_(hrsa_designations))
     if (years):
         query = query.filter(Record.full_year.in_(years))
+    if (tags):
+        query = query.filter(Record.tags.any(Tag.name.in_(tags)))
     if (findings_keywords):
         query = query.filter(Record.opa_findings.like('%' + findings_keywords + '%'))
     if (entity_keywords):
@@ -37,10 +40,12 @@ def states():
     states = State.query.all()
     hrsa_designations = HrsaDesignation.query.all()
     years = Record.query.with_entities(Record.full_year).distinct().all()
+    tags = Tag.query.all()
     result = {
         'state_items': states_schema.dump(states),
         'hrsa_designation_items': hrsa_designations_schema.dump(hrsa_designations),
-        'year_items': [ {'id': i, 'year': str(year)} for i, year in  enumerate(sorted(list(chain(*years)))) ]
+        'tag_items': tags_schema.dump(tags),
+        'year_items': [ {'id': i, 'year': str(year)} for i, year in  enumerate(sorted(list(chain(*years)))) ],
     }
     return result
 
