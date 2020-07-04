@@ -54,7 +54,7 @@ def seed(filepath):
 def ipython():
     """Open Ipython session"""
     from app.database import db
-    from app.auditlog.models import Record
+    from app.auditlog.models import Record, State, HrsaDesignation, Tag
     from IPython import embed
     from traitlets.config import get_config
     config = get_config()
@@ -62,7 +62,10 @@ def ipython():
     embed(
         user_ns={
             'db': db,
-            'Record': Record
+            'Record': Record,
+            'State': State,
+            'HrsaDesignation': HrsaDesignation,
+            'Tag': Tag,
         },
         config=config
     )
