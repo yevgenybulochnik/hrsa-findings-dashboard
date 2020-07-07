@@ -1,26 +1,32 @@
 [
   {
     "title": "Diversion",
-    "name": "diversion"
+    "name": "diversion",
+    "color": "#DB3737"
   },
   {
     "title": "GPO Prohibition",
-    "name": "gpo"
+    "name": "gpo",
+    "color": "#008075"
   },
   {
     "title": "Duplicate Discounts",
-    "name": "duplicate_discounts"
+    "name": "duplicate_discounts",
+    "color": "#A854A8"
   },
   {
     "title": "OPAIS Database",
-    "name": "database"
+    "name": "database",
+    "color": "#F29D49"
   },
   {
     "title": "No Findings",
-    "name": "no_findings"
+    "name": "no_findings",
+    "color": "#15B371"
   },
   {
     "title": "Misc",
-    "name": "misc"
+    "name": "misc",
+    "color": "#5C7080"
   }
 ]

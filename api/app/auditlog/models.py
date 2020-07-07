@@ -10,6 +10,7 @@ class Tag(Model):
     id = Column(db.Integer, primary_key=True)
     title = Column(db.String())
     name = Column(db.String())
+    color = Column(db.String())
 
 class State(Model):
     __tablename__ = 'states'

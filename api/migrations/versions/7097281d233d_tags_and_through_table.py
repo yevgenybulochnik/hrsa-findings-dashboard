@@ -22,6 +22,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(), nullable=True),
     sa.Column('name', sa.String(), nullable=True),
+    sa.Column('color', sa.String(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('tags',

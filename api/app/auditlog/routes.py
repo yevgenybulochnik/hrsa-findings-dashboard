@@ -117,7 +117,7 @@ def summary(states=None, hrsa_designations=None):
     "years": fields.DelimitedList(fields.Str()),
 }, location='query')
 def summary_findings(states=None, hrsa_designations=None, years=None):
-    query = db.session.query(Tag.name, func.count(Tag.id)).join(tags).join(Record).join(State).join(HrsaDesignation).group_by(Tag.id)
+    query = db.session.query(Tag.title, Tag.color, func.count(Tag.id)).join(tags).join(Record).join(State).join(HrsaDesignation).group_by(Tag.id)
     if states:
         query = query.filter(State.abv.in_(states))
     if hrsa_designations:
@@ -125,5 +125,5 @@ def summary_findings(states=None, hrsa_designations=None, years=None):
     if years:
         query = query.filter(Record.full_year.in_(years))
 
-    result = [{'name': name, 'value': value} for name, value in query.all()]
+    result = [{'name': name, 'color': color ,'value': value} for name, color, value in query.all()]
     return jsonify(result)

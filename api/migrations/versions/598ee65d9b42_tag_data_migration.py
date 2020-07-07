@@ -29,7 +29,8 @@ with open(MIGRATIONS_DIR / 'fixtures' / 'tags.json') as f:
 def upgrade():
     tags = table('tag',
         column('title', String),
-        column('name', String)
+        column('name', String),
+        column('color', String)
     )
 
     op.bulk_insert(tags, data)
