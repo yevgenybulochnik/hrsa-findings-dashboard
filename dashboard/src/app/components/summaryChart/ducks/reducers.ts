@@ -14,6 +14,25 @@ function summaryData(state = [], action: SummaryChartActionTypes) {
   }
 }
 
+function summaryFindingsData(state = {summary: [], totals: []}, action: SummaryChartActionTypes) {
+  switch (action.type) {
+    case 'FETCH_SUMMARY_FINDINGS_DATA_SUCCESS': {
+      const { data } = action.payload
+      const findings = data.filter((d: any) => d.name !== 'No Findings' && d.name !== 'Findings')
+      const totals = data.filter((d: any) => d.name === 'No Findings' || d.name === 'Findings')
+      console.log(data)
+      console.log(findings)
+      console.log(totals)
+      return {
+        summary: findings,
+        totals: totals
+      }
+    }
+    default:
+      return state
+  }
+}
+
 function selectedStates(state = [], action: SummaryChartActionTypes) {
   switch (action.type) {
     case 'ADD_SUMMARY_FILTER_ITEM': {
@@ -66,6 +85,7 @@ function totalToggleChecked(state = true, action: SummaryChartActionTypes) {
 
 const summaryChartReducer = combineReducers({
   summaryData,
+  summaryFindingsData,
   selectedStates,
   selectedHrsaDes,
   totalToggleChecked,

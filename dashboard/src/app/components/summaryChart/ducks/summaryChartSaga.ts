@@ -17,8 +17,10 @@ const getFilterSelections = (state: RootState) => {
 function* fetchData() {
   try {
     const queryParams = yield select(getFilterSelections)
-    const data = yield dataService.getSummary(queryParams)
-    yield put(actions.fetchSummaryDataSuccess(data))
+    const summaryData = yield dataService.getSummary(queryParams)
+    const summaryFindingsData = yield dataService.getSummaryFindings(queryParams)
+    yield put(actions.fetchSummaryDataSuccess(summaryData))
+    yield put(actions.fetchSummaryFindingsDataSuccess(summaryFindingsData))
   } catch (error) {
     console.log(error)
   }
@@ -26,6 +28,7 @@ function* fetchData() {
 
 function* init() {
   yield put(actions.fetchSummaryData())
+  yield put(actions.fetchSummaryFindingsData())
 }
 
 // Watchers
