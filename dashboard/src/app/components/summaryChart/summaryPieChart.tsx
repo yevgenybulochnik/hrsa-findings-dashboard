@@ -40,56 +40,41 @@ const renderActiveShape = (props: any) => {
       />
       <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none"/>
       <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none"/>
-      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`PV ${value}`}</text>
+      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`Records: ${value}`}</text>
       <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
-        {`(Rate ${(percent * 100).toFixed(2)}%)`}
+        {`${(percent * 100).toFixed(2)}%`}
       </text>
     </g>
   );
 }
 
 interface Props {
+  data: any;
 }
 
 const SummaryPieChart: React.SFC<Props> = (props) => {
-  const [ data, setData ] = React.useState({pie1: [], pie2: []})
+  const { data } = props
   const [ activeIndex, setActiveIndex ] = React.useState(undefined)
 
-  React.useEffect(() => {
-    const fetchData = async () => {
-      let result = await fetch('/api/summary/findings/').then((res) => res.json())
-      let findings = result.filter((res: any) => res.name !== 'no_findings')
-      let no_findings = result.filter((res: any) => res.name === 'no_findings')
-      let total = findings.reduce((acc: number, res: any) => acc + res.value, 0)
-      no_findings.push({ name: 'findings', value: total})
-      setData({pie1: findings, pie2: no_findings})
-    }
-
-    fetchData()
-  }, [])
-
   return (
-    <Card style={{height: '400px'}} elevation={Elevation.TWO}>
+    <Card style={{height: '400px', marginTop: '1em'}} elevation={Elevation.TWO}>
       <ResponsiveContainer>
         <PieChart>
           <Pie
-            data={data.pie1}
+            activeIndex={activeIndex}
+            activeShape={renderActiveShape}
+            data={data}
             dataKey='value'
             nameKey='name'
             fill="#82ca9d"
-            innerRadius={20}
-            outerRadius={60}
-          />
-          <Pie
-            activeIndex={activeIndex}
-            activeShape={renderActiveShape}
-            data={data.pie2}
-            dataKey='value'
-            nameKey='name'
-            innerRadius={100}
-            outerRadius={130}
-            onMouseEnter={(data, index) => setActiveIndex(index)}
-          />
+            innerRadius='40%'
+            outerRadius='60%'
+            onMouseEnter={(_, index) => setActiveIndex(index)}
+          >
+            {
+              data.map((entry: any, index: number) => <Cell key={`cell-${index}`} fill={entry.color} />)
+            }
+          </Pie>
           <Legend verticalAlign='top'/>
         </PieChart>
       </ResponsiveContainer>
