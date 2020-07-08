@@ -118,12 +118,25 @@ def summary(states=None, hrsa_designations=None):
 }, location='query')
 def summary_findings(states=None, hrsa_designations=None, years=None):
     query = db.session.query(Tag.title, Tag.color, func.count(Tag.id)).join(tags).join(Record).join(State).join(HrsaDesignation).group_by(Tag.id)
+    total_query = (
+        db.session.query(tags.c.record_id)
+        .join(Tag)
+        .join(Record)
+        .join(State)
+        .join(HrsaDesignation)
+        .filter(~Tag.name.in_(['no_findings']))
+        .distinct()
+    )
     if states:
         query = query.filter(State.abv.in_(states))
+        total_query = total_query.filter(State.abv.in_(states))
     if hrsa_designations:
         query = query.filter(HrsaDesignation.abv.in_(hrsa_designations))
+        total_query = total_query.filter(HrsaDesignation.abv.in_(hrsa_designations))
     if years:
         query = query.filter(Record.full_year.in_(years))
+        total_query = total_query.filter(Record.full_year.in_(years))
 
     result = [{'name': name, 'color': color ,'value': value} for name, color, value in query.all()]
+    result.append({'name': 'Findings', 'color': '#DB3737', 'value': len(total_query.all())})
     return jsonify(result)
