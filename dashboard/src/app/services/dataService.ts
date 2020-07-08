@@ -49,10 +49,26 @@ function getSummary(queryParams: SummaryQueryParams) {
     .then((res) => res.json())
 }
 
+function getSummaryFindings(queryParams: SummaryQueryParams) {
+  let url = '/api/summary/findings/'
+  let queryStrings = []
+  if (queryParams) {
+    for (const key in queryParams) {
+      if (queryParams[key].length) {
+        queryStrings.push(`${key}=${queryParams[key]}`)
+      }
+    }
+    url += `?${queryStrings.join('&')}`
+  }
+  return fetch(url)
+    .then((res) => res.json())
+}
+
 const dataService = {
   getRecords,
   getFilterItems,
   getSummary,
+  getSummaryFindings,
 }
 
 export default dataService
