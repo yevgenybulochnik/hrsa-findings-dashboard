@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
 import { Card, Elevation } from '@blueprintjs/core'
@@ -35,13 +34,6 @@ interface Props {
   onTagTagRemove: any;
 }
 
-const StyledCard = styled(Card)`
-  margin-bottom: 1em;
-  max-width: 20rem;
-  flex: 1;
-`
-
-
 const FilterCard: React.SFC<Props> = (props) => {
   const {
     yearItems,
@@ -65,7 +57,7 @@ const FilterCard: React.SFC<Props> = (props) => {
     onTagTagRemove,
   } = props
   return (
-    <StyledCard elevation={Elevation.TWO}>
+    <Card elevation={Elevation.TWO}>
       <YearSelector
         yearItems={yearItems}
         selectedYears={selectedYears}
@@ -90,7 +82,7 @@ const FilterCard: React.SFC<Props> = (props) => {
         onItemSelect={onTagSelect}
         onTagRemove={onTagTagRemove}
       />
-    </StyledCard>
+    </Card>
   )
 }
 

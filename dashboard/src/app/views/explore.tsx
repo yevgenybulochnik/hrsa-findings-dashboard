@@ -9,16 +9,10 @@ import { FilterCard } from '../components/filterCard'
 import { InfoCard }from '../components/infoCard'
 import { SearchCard } from '../components/searchCard'
 
-const FilterSearchContainer = styled.div`
-  display: flex;
-  width: 20em;
-  flex-direction: column;
-`
-
-const FlexRow =  styled.div`
-  display: flex;
-  height: 500px;
-  align-items: center;
+const Container = styled.div`
+  > * {
+    margin-bottom: 1em;
+  }
 `
 
 interface Props {
@@ -30,16 +24,12 @@ const Explore: React.SFC<Props> = (props) => {
   const { handleRowClick } = props
 
   return (
-    <>
-      <FlexRow>
-        <FilterSearchContainer>
-          <FilterCard />
-          <SearchCard />
-        </FilterSearchContainer>
-        <InfoCard />
-      </FlexRow>
+    <Container>
+      <FilterCard />
+      <SearchCard />
+      <InfoCard />
       <AuditEntryTable onRowClick={handleRowClick} height='300px' data={props.data}/>
-    </>
+    </Container>
   )
 }
 

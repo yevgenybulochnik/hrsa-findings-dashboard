@@ -57,7 +57,7 @@ const SummaryPieChart: React.SFC<Props> = (props) => {
   const [ activeIndex, setActiveIndex ] = React.useState(undefined)
 
   return (
-    <Card style={{height: '400px', marginTop: '1em'}} elevation={Elevation.TWO}>
+    <Card style={{height: '400px'}} elevation={Elevation.TWO}>
       <ResponsiveContainer>
         <PieChart>
           <Pie

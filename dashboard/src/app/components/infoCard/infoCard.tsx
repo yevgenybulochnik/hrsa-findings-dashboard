@@ -6,9 +6,7 @@ import { RootState } from '../../rootReducer'
 
 
 const StyledCard = styled(Card)`
-  margin: 0 0 1em 1em;
   min-height: 20em;
-  flex: 1;
 `
 
 const StyledCallout = styled(Callout)`

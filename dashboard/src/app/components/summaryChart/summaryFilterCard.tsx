@@ -37,7 +37,7 @@ const SummaryFilterCard: React.SFC<Props> = (props) => {
   } = props
 
   return (
-    <Card elevation={Elevation.TWO} style={{'marginBottom': '1em'}}>
+    <Card elevation={Elevation.TWO}>
       <Container>
         <StateSelector
           stateItems={stateItems}
