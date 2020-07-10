@@ -20,9 +20,6 @@ function summaryFindingsData(state = {summary: [], totals: []}, action: SummaryC
       const { data } = action.payload
       const findings = data.filter((d: any) => d.name !== 'No Findings' && d.name !== 'Findings')
       const totals = data.filter((d: any) => d.name === 'No Findings' || d.name === 'Findings')
-      console.log(data)
-      console.log(findings)
-      console.log(totals)
       return {
         summary: findings,
         totals: totals
