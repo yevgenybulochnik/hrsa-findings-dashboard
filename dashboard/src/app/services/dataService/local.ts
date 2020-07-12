@@ -189,21 +189,32 @@ export function getSummary(queryParams: SummaryQueryParams) {
     })
     return acc
   }, yearItems)
-  console.log(summaryData)
   return summaryData
 }
 
 export function getSummaryFindings(queryParams: SummaryQueryParams) {
-  let url = '/api/summary/findings/'
-  let queryStrings = []
-  if (queryParams) {
-    for (const key in queryParams) {
-      if (queryParams[key].length) {
-        queryStrings.push(`${key}=${queryParams[key]}`)
+  const data = getRecords(queryParams)
+  const adjustedTagItems = getFilterItems().tag_items.map((tag: any) => {
+    const adjTag: any = {}
+    adjTag['name'] = tag.title
+    adjTag['value'] = 0
+    adjTag['color'] = tag.color
+    return adjTag
+  })
+  const summaryFindingsData = data.reduce((acc: any, d: any) => {
+    adjustedTagItems.map((tag: any) => {
+      if (d.tags.includes(tag.name)) {
+        if (tag.value) {
+          tag.value += 1
+        } else {
+          tag.value = 1
+        }
       }
-    }
-    url += `?${queryStrings.join('&')}`
-  }
-  return fetch(url)
-    .then((res) => res.json())
+    })
+    return acc
+  }, adjustedTagItems)
+  const noFindings = summaryFindingsData.filter((tag: any) => tag.name === 'No Findings')[0]
+  const findings = { name: 'Findings', color: '#DB3737', value: data.length - noFindings.value }
+  summaryFindingsData.push(findings)
+  return summaryFindingsData
 }
