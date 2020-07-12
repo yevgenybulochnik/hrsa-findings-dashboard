@@ -1,5 +1,4 @@
 
-
 type RecordQueryParams = {
   years: string[];
   states: string[];
@@ -9,7 +8,7 @@ type RecordQueryParams = {
   [ key: string ]: any;
 }
 
-function getRecords(queryParams: RecordQueryParams) {
+export function getRecords(queryParams: RecordQueryParams) {
   let url = '/api/records/'
   let queryStrings = []
   if (queryParams) {
@@ -24,7 +23,7 @@ function getRecords(queryParams: RecordQueryParams) {
     .then((res) => res.json())
 }
 
-function getFilterItems() {
+export function getFilterItems() {
   return fetch('/api/filteritems/')
     .then((res) => res.json())
 }
@@ -34,7 +33,7 @@ type SummaryQueryParams = {
   [ key: string ]: any;
 }
 
-function getSummary(queryParams: SummaryQueryParams) {
+export function getSummary(queryParams: SummaryQueryParams) {
   let url = '/api/summary/'
   let queryStrings = []
   if (queryParams) {
@@ -49,7 +48,7 @@ function getSummary(queryParams: SummaryQueryParams) {
     .then((res) => res.json())
 }
 
-function getSummaryFindings(queryParams: SummaryQueryParams) {
+export function getSummaryFindings(queryParams: SummaryQueryParams) {
   let url = '/api/summary/findings/'
   let queryStrings = []
   if (queryParams) {
@@ -63,12 +62,3 @@ function getSummaryFindings(queryParams: SummaryQueryParams) {
   return fetch(url)
     .then((res) => res.json())
 }
-
-const dataService = {
-  getRecords,
-  getFilterItems,
-  getSummary,
-  getSummaryFindings,
-}
-
-export default dataService
