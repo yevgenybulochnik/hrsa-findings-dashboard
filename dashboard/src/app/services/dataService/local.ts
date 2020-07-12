@@ -75,10 +75,10 @@ function buildQuery(queryParams: any) {
       query['state'] = queryParams[key]
     }
     if (key === 'entity_keywords' && queryParams[key].length) {
-      query['entity'] = queryParams[key]
+      query['entity_keywords'] = queryParams[key]
     }
     if (key === 'findings_keywords' && queryParams[key].length) {
-      query['opa_findings'] = queryParams[key]
+      query['findings_keywords'] = queryParams[key]
     }
     if (key === 'tags' && queryParams[key].length) {
       const tags = queryParams[key].map((tag: any) => {
@@ -125,6 +125,18 @@ export function getRecords(queryParams: RecordQueryParams) {
           }
         })
         return tagExists
+      }
+      if ( key === 'entity_keywords' ) {
+        const re =  new RegExp(`${query.entity_keywords}`, 'i')
+        if(re.test(d.entity)) {
+          return true
+        }
+      }
+      if ( key === 'findings_keywords' ) {
+        const re =  new RegExp(`${query.findings_keywords}`, 'i')
+        if(re.test(d.opa_findings)) {
+          return true
+        }
       }
       if (!query[key].includes(d[key])) {
         return false
