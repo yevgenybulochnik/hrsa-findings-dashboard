@@ -112,7 +112,7 @@ type RecordQueryParams = {
   [ key: string ]: any;
 }
 
-export function getRecords(queryParams: RecordQueryParams) {
+export function getRecords(queryParams: any) {
   const data = parseData()
   const query = buildQuery(queryParams)
   const filteredData = data.filter((d: any) => {
@@ -161,18 +161,36 @@ type SummaryQueryParams = {
 }
 
 export function getSummary(queryParams: SummaryQueryParams) {
-  let url = '/api/summary/'
-  let queryStrings = []
-  if (queryParams) {
-    for (const key in queryParams) {
-      if (queryParams[key].length) {
-        queryStrings.push(`${key}=${queryParams[key]}`)
-      }
+  const data = parseData()
+  const yearItems = getFilterItems().year_items.map((item: any) => { return { ...item, count: 0 } })
+  const summaryData = data.filter((d: any) => {
+    if (queryParams.hrsa_designations.length) {
+      return queryParams.hrsa_designations.includes(d.entity_abv)
     }
-    url += `?${queryStrings.join('&')}`
-  }
-  return fetch(url)
-    .then((res) => res.json())
+    return d
+  }).reduce((acc: any, d: any) => {
+    yearItems.map((item: any) => {
+      if (item.year === d.full_year) {
+        acc.filter((n: any) => {
+          if (item.year === n.year) {
+            item['count'] += 1
+            if (queryParams.states.length) {
+              if (queryParams.states.includes(d.state)) {
+                if (item[d.state]) {
+                  item[d.state] += 1
+                } else {
+                  item[d.state] = 1
+                }
+              }
+            }
+          }
+        })
+      }
+    })
+    return acc
+  }, yearItems)
+  console.log(summaryData)
+  return summaryData
 }
 
 export function getSummaryFindings(queryParams: SummaryQueryParams) {
