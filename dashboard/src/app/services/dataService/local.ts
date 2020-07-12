@@ -32,7 +32,7 @@ export function setupFilterItems(stateItems: any, hrsaDesItems: any, tagItems:an
       return acc
     }
   } , [])
-  const yearItems = years.map((year: string, i: any) => {
+  const yearItems = years.sort().map((year: string, i: any) => {
     const item: any = {}
     item.year = year
     item.id = i
