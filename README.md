@@ -41,4 +41,5 @@ This repository is a full stack dashboard using flask and React/Redux + typescri
 - React-router
 - Recharts
 - D3
+- Moment
 </details>
