@@ -2,6 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom'
 import { Tabs, Tab, Navbar, Button, Popover, Menu, MenuItem } from '@blueprintjs/core'
+import githubpng from './github.png'
+import linkedinpng from './linkedin.png'
+
+declare module "*.png"
 
 const Styles = styled.div`
   .nav-tabs-desktop {
@@ -21,6 +25,13 @@ const Styles = styled.div`
 
 const Spacer = styled.span`
   width: 50px;
+`
+
+const IconAnchor = styled.a`
+  margin: 0 0.5em 0 0.5em;
+  img {
+    height: 2em;
+  }
 `
 
 interface Props extends RouteComponentProps {
@@ -49,6 +60,14 @@ const Nav: React.SFC<Props> = (props) => {
         <Navbar.Group>
           <Navbar.Heading>{branding}</Navbar.Heading>
           <Navbar.Divider />
+        </Navbar.Group>
+        <Navbar.Group>
+          <IconAnchor href="https://github.com/yevgenybulochnik/hrsa-findings-dashboard">
+            <img src={githubpng} alt="Github" />
+          </IconAnchor>
+          <IconAnchor href="https://www.linkedin.com/in/yevgeny-eugene-bulochnik-b429a6155/">
+            <img src={linkedinpng} alt="Github" />
+          </IconAnchor>
         </Navbar.Group>
         <Navbar.Group className='nav-tabs-desktop'>
           <Tabs selectedTabId={setPathname()} large={true} animate={true}>
