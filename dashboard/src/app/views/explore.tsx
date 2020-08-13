@@ -9,9 +9,35 @@ import { FilterCard } from '../components/filterCard'
 import { InfoCard }from '../components/infoCard'
 import { SearchCard } from '../components/searchCard'
 
+const SideBar = styled.div``
+
+const MainDiv = styled.div``
+
 const Container = styled.div`
-  > * {
-    margin-bottom: 1em;
+  ${SideBar} {
+    > * {
+      margin-bottom: 1em;
+    }
+  }
+
+  ${MainDiv} {
+    > * {
+      margin-bottom: 1em;
+    }
+  }
+
+  @media(min-width: 750px) {
+    display: grid;
+    grid-template-columns: 3fr 8fr;
+    column-gap: 1em;
+    row-gap: 1em;
+    grid-template-areas:
+      "filters main";
+    margin: 1em;
+
+    ${SideBar} {
+      padding-top: 3em;
+    }
   }
 `
 
@@ -25,10 +51,14 @@ const Explore: React.SFC<Props> = (props) => {
 
   return (
     <Container>
-      <FilterCard />
-      <SearchCard />
-      <InfoCard />
-      <AuditEntryTable onRowClick={handleRowClick} height='300px' data={props.data}/>
+      <SideBar>
+        <FilterCard />
+        <SearchCard />
+      </SideBar>
+      <MainDiv>
+        <AuditEntryTable onRowClick={handleRowClick} height='210px' data={props.data}/>
+        <InfoCard />
+      </MainDiv>
     </Container>
   )
 }
