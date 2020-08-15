@@ -56,7 +56,7 @@ const Explore: React.SFC<Props> = (props) => {
         <SearchCard />
       </SideBar>
       <MainDiv>
-        <AuditEntryTable onRowClick={handleRowClick} height='210px' data={props.data}/>
+        <AuditEntryTable onRowClick={handleRowClick} height='250px' data={props.data}/>
         <InfoCard />
       </MainDiv>
     </Container>
