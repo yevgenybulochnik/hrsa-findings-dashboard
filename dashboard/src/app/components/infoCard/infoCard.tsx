@@ -49,7 +49,7 @@ const InfoCard: React.SFC<Props> = (props) => {
             {auditEntry.cap_status}
           </StyledCallout>
         </>
-      ) : (<Filler>...Please Click Row</Filler>) }
+      ) : (<Filler>...Please Click On Table Row</Filler>) }
     </StyledCard>
   )
 }
