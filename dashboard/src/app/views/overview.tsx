@@ -34,7 +34,7 @@ const Container = styled.div`
 
     ${PieContainer} {
       > * {
-        width: 400px;
+        width: 500px;
       }
       justify-content: space-around;
       display: flex;
