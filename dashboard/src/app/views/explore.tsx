@@ -14,19 +14,13 @@ const SideBar = styled.div``
 const MainDiv = styled.div``
 
 const Container = styled.div`
-  ${SideBar} {
+  ${SideBar}, ${MainDiv} {
     > * {
       margin-bottom: 1em;
     }
   }
 
-  ${MainDiv} {
-    > * {
-      margin-bottom: 1em;
-    }
-  }
-
-  @media(min-width: 750px) {
+  @media(min-width: 1175px) {
     display: grid;
     grid-template-columns: 3fr 8fr;
     column-gap: 1em;

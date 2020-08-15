@@ -18,7 +18,7 @@ const Container = styled.div`
     }
   }
 
-  @media(min-width: 750px) {
+  @media(min-width: 1175px) {
     margin: 1em;
     display: grid;
     grid-template-columns: 3fr 8fr;
