@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.js": "/hrsa-findings-dashboard/static/js/main.8ee2969a.chunk.js",
+    "main.js.map": "/hrsa-findings-dashboard/static/js/main.8ee2969a.chunk.js.map",
+    "runtime-main.js": "/hrsa-findings-dashboard/static/js/runtime-main.6973ca65.js",
+    "runtime-main.js.map": "/hrsa-findings-dashboard/static/js/runtime-main.6973ca65.js.map",
+    "static/css/2.b5cf0199.chunk.css": "/hrsa-findings-dashboard/static/css/2.b5cf0199.chunk.css",
+    "static/js/2.c784ba0c.chunk.js": "/hrsa-findings-dashboard/static/js/2.c784ba0c.chunk.js",
+    "static/js/2.c784ba0c.chunk.js.map": "/hrsa-findings-dashboard/static/js/2.c784ba0c.chunk.js.map",
+    "index.html": "/hrsa-findings-dashboard/index.html",
+    "precache-manifest.1fa4ad6262eb8a7ff92d86a03cf7b496.js": "/hrsa-findings-dashboard/precache-manifest.1fa4ad6262eb8a7ff92d86a03cf7b496.js",
+    "service-worker.js": "/hrsa-findings-dashboard/service-worker.js",
+    "static/css/2.b5cf0199.chunk.css.map": "/hrsa-findings-dashboard/static/css/2.b5cf0199.chunk.css.map",
+    "static/js/2.c784ba0c.chunk.js.LICENSE.txt": "/hrsa-findings-dashboard/static/js/2.c784ba0c.chunk.js.LICENSE.txt",
+    "static/media/blueprint-icons.css": "/hrsa-findings-dashboard/static/media/icons-20.cef8cdbb.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6973ca65.js",
+    "static/css/2.b5cf0199.chunk.css",
+    "static/js/2.c784ba0c.chunk.js",
+    "static/js/main.8ee2969a.chunk.js"
+  ]
+}
