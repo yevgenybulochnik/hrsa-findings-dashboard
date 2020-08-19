@@ -20,6 +20,7 @@ services:
     container_name: db
     volumes:
       - db_data:/var/lib/postgresql/data/
+      - ./api/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
 
   api:
     environment:
