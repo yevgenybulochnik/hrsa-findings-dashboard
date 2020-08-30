@@ -1,0 +1,35 @@
+---
+records:
+  - hrsa_id: "test_id1"
+    entity: 'test_entity1'
+    hrsa_designation_id: 1
+    state_id: 1
+    year: 'year_2020'
+    full_year: 2020 
+    opa_findings: 'test_findings1'
+    sanction: 'test_sanction1'
+    cap_status: 'test_status1'
+    entity_contact: 'test_entity_contact1'
+    tags: []
+  - hrsa_id: "test_id2"
+    entity: 'test_entity2'
+    hrsa_designation_id: 2
+    state_id: 2
+    year: 'year_2020'
+    full_year: 2020
+    opa_findings: 'test_findings2'
+    sanction: 'test_sanction2'
+    cap_status: 'test_status2'
+    entity_contact: 'test_entity_contact2'
+    tags: []
+  - hrsa_id: "test_id3"
+    entity: 'test_entity3'
+    hrsa_designation_id: 3
+    state_id: 3
+    year: 'year_2020'
+    full_year: 2020
+    opa_findings: 'test_findings3'
+    sanction: 'test_sanction3'
+    cap_status: 'test_status3'
+    entity_contact: 'test_entity_contact3'
+    tags: []

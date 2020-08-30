@@ -23,6 +23,7 @@ flask-migrate = "^2.5.3"
 [tool.poetry.dev-dependencies]
 pytest = "^5.4.2"
 ipython = "^7.14.0"
+pyyaml = "^5.3.1"
 
 [tool.poetry.plugins."flask.commands"]
 "seed" = "app.cli:seed"
